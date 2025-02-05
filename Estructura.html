@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Parque Simón Bolívar</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOMJa2JFSUjYpBYqNhh0AvS1voXmGmrXQ&callback=initMap" async defer></script>
+    <style>
+
+        #map {
+            height: 90vh;
+            width: 100%;
+        }
+        #title {
+            text-align: center;
+            font-size: 3em;
+            margin-top: 20px;
+            color: rgb(38, 17, 225); 
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="title">Festival Cordillera</div>
+    <div id="map"></div>
+    
+    <script>
+        function initMap() {
+            // Coordenadas del Parque Simón Bolívar, Bogotá
+            var parqueBolivar = { lat: 4.6584, lng: -74.0935 };
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: parqueBolivar
+            });
+            
+            // Lista de marcadores con iconos personalizados
+            var lugares = [
+                { nombre: "Entrada Principal", lat: 4.6569, lng: -74.0911, icono: "https://maps.google.com/mapfiles/kml/pal3/icon31.png" },
+                { nombre: "Entrada Secundaria", lat: 4.6592, lng: -74.0915, icono: "https://maps.google.com/mapfiles/kml/pal3/icon31.png" },
+                { nombre: "Salida", lat: 4.6605, lng: -74.0942, icono: "https://maps.google.com/mapfiles/kml/pal3/icon48.png" },
+                { nombre: "Baños 1", lat: 4.6590, lng: -74.0925, icono: "https://maps.google.com/mapfiles/kml/pal3/icon20.png" },
+                { nombre: "Baños 2", lat: 4.6597, lng: -74.0930, icono: "https://maps.google.com/mapfiles/kml/pal3/icon20.png" },
+                { nombre: "Escenario 1", lat: 4.6575, lng: -74.0930, icono: "https://maps.google.com/mapfiles/kml/pal3/icon49.png" },
+                { nombre: "Escenario 2", lat: 4.6582, lng: -74.0937, icono: "https://maps.google.com/mapfiles/kml/pal3/icon49.png" },
+                { nombre: "Escenario 3", lat: 4.6580, lng: -74.0922, icono: "https://maps.google.com/mapfiles/kml/pal3/icon49.png" },
+                { nombre: "Punto Ecológico 1", lat: 4.6586, lng: -74.0920, icono: "https://maps.google.com/mapfiles/kml/pal3/icon30.png" },
+                { nombre: "Punto Ecológico 2", lat: 4.6590, lng: -74.0940, icono: "https://maps.google.com/mapfiles/kml/pal3/icon30.png" },
+                { nombre: "Zona de descanso", lat: 4.6588, lng: -74.0948, icono: "https://maps.google.com/mapfiles/kml/pal3/icon55.png" },
+                { nombre: "Stand de comida 1", lat: 4.6595, lng: -74.0922, icono: "https://maps.google.com/mapfiles/kml/pal3/icon21.png" },
+                { nombre: "Stand de comida 2", lat: 4.6597, lng: -74.0925, icono: "https://maps.google.com/mapfiles/kml/pal3/icon21.png" },
+                { nombre: "Stand de comida 3", lat: 4.6592, lng: -74.0930, icono: "https://maps.google.com/mapfiles/kml/pal3/icon21.png" },
+                { nombre: "Stand de comida 4", lat: 4.6593, lng: -74.0935, icono: "https://maps.google.com/mapfiles/kml/pal3/icon21.png" },
+                { nombre: "Stand de comida 5", lat: 4.6596, lng: -74.0927, icono: "https://maps.google.com/mapfiles/kml/pal3/icon21.png" },
+                { nombre: "Stand de comida 6", lat: 4.6598, lng: -74.0932, icono: "https://maps.google.com/mapfiles/kml/pal3/icon21.png" },
+                { nombre: "Juegos mecánicos", lat: 4.6582, lng: -74.0916, icono: "https://maps.google.com/mapfiles/kml/pal3/icon54.png" }
+            ];
+            
+            // Agregar marcadores al mapa
+            lugares.forEach(function (lugar) {
+                var marker = new google.maps.Marker({
+                    position: { lat: lugar.lat, lng: lugar.lng },
+                    map: map,
+                    title: lugar.nombre,
+                    icon: lugar.icono
+                });
+                
+                var infoWindow = new google.maps.InfoWindow({
+                    content: `<h3>${lugar.nombre}</h3>`
+                });
+                
+                marker.addListener("click", function () {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
